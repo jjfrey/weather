@@ -1,6 +1,10 @@
 FactoryBot.define do
-  factory(:user) do
-    email { Faker::Internet.email }
-    password { Faker::Internet.password }
+  factory :forecast do
+    
   end
+
+  factory :search do
+    query { "MyString" }
+  end
+
 end

@@ -6,7 +6,7 @@ class Forecast < ApplicationRecord
   end
 
   def self.get_lat_long(query)
-    api_key = ENV['GEO_API_KEY'] || '65b400a85859d402123614agoe692f3'
+    api_key = ENV['GEO_API_KEY'] 
     response = HTTParty.get("https://geocode.maps.co/search?q=#{query}&api_key=#{api_key}")
     locations = JSON.parse(response.body)
     return nil if locations.size == 0

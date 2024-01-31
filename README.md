@@ -24,4 +24,9 @@ How to run the test suite
 rspec spec
 ```
 
+How to run the application
+```bash
+rails server
+```
+
 

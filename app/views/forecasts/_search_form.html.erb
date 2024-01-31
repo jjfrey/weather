@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <%= form_for @forecast, :html => {:id => 'search_form'}  do |f| %>
+        <label class="form-label">Please provide your address: </label>
+        <%= f.text_field :query, placeholder: 'ex. Akron, Ohio 44320', autofocus: true, class: 'title-field pull-left' %>
+        <%= f.submit 'Search', class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,7 +1,9 @@
-<%= form_with url: "/forecasts", method: :post do |form| %>
-  <div class="mb-3">
-    <label class="form-label">Please provide your address: </label>
-    <%= form.text_field :query, class:"form-control" %>
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+<% if flash[:zip_error] %>
+  Please provide a zipcode
+  <% flash[:zip_error] = nil %> 
 <% end %>
+<% if flash[:result_error] %>
+  Please provide a valid address
+  <% flash[:result_error] = nil %> 
+<% end %>
+<%= render "search_form" %>

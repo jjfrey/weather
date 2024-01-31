@@ -1,33 +1,53 @@
 class ForecastsController < ApplicationController
 
   def new
+    @forecast = Forecast.new
   end
 
   def create
-    #get the lat/long from the address provided
-    query = params[:query]
-    api_key = ENV['GEO_API_KEY'] || '65b400a85859d402123614agoe692f3'
-    response = HTTParty.get("https://geocode.maps.co/search?q=#{query}&api_key=#{api_key}")
+    query = params[:forecast][:query]
+    zipcode = Forecast.parse_zip(query)
 
-    locations = JSON.parse(response.body)
+    if zipcode.blank?
+      flash[:zip_error] = "zipcode was not provided"
+      @forecast = Forecast.new(query: query)
+      render action: "new"
+      return false
+    end
 
-    first_location = locations.first if !locations.empty?
-    #display message if there isn't a first location
-    latitude = first_location["lat"] 
-    longitude = first_location["lon"] 
+    latitude, longitude = Forecast.get_lat_long(query)
 
-    #get the forecast results from the API
-    result = HTTParty.get("https://api.weather.gov/points/#{latitude},#{longitude}")
-    url = JSON.parse(result.body)["properties"]["forecast"]
+    if latitude.blank?
+      flash[:result_error] = "no results returned"
+      @forecast = Forecast.new(query: query)
+      render action: "new"
+      return false
+    end
 
-    forecast_result = HTTParty.get(url)
-    puts forecast_result.body
+    url = Forecast.get_forecast_url(latitude, longitude)
 
+    if url.blank?
+      flash[:result_error] = "no results returned"
+      @forecast = Forecast.new(query: query)
+      render action: "new"
+      return false
+    end
+
+    @forecast = Forecast.create(
+      latitude: latitude, 
+      longitude: longitude,
+      query: query,
+      zipcode: zipcode,
+      url: url
+    ) 
+
+    redirect_to(@forecast)
   end
 
   def show
+    @forecast = Forecast.find(params[:id])
+    result = HTTParty.get(@forecast[:url])
+    @forecast_results = JSON.parse(result.body)["properties"]["periods"]
   end
-
-
-
+  
 end

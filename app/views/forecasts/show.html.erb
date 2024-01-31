@@ -1,0 +1,17 @@
+<a href="/">Search again</a>
+<div class="container" id="results_table">
+
+  <% @forecast_results.each do |result| %>
+    <div class="card" style="width: 18rem;">
+      <img src="<%= result["icon"] %>" class="card-img-top" />
+      <div class="card-body">
+        <h5 class="card-title"><%= result["name"] %></h5>
+        <p class="card-text">
+        <%= result["temperature"] %>&deg;<br />
+        <%= result["shortForecast"] %>
+        </p>
+      </div>
+    </div>
+  <% end %>
+
+</div>

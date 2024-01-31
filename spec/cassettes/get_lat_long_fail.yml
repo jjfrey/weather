@@ -1,0 +1,45 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://geocode.maps.co/search?api_key=65b400a85859d402123614agoe692f3&q=iiiiiwwwwwiiiii
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 31 Jan 2024 02:12:22 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '2'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Cf-Cache-Status:
+      - DYNAMIC
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=swZlko8aP6QRsIsaT0W8lOOAqcMZtq%2BCETDqj3rPtVtRBd%2BvK9WrPKiZkiaJhAMNVuc07db9Q7Z%2Fc93uMUYyKy8Mnjcv5l4%2BOuqIfVyd5MK8dQwvG5vvma1EJjnWFT9t4YD5t0CtdhwyBMaqeQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      Nel:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 84de6de94dd3810e-ORD
+    body:
+      encoding: UTF-8
+      string: "[]"
+  recorded_at: Wed, 31 Jan 2024 02:12:22 GMT
+recorded_with: VCR 6.2.0
